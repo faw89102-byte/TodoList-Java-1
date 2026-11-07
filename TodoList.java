@@ -48,23 +48,26 @@ public static void fungsiTambah(String tambah) {
 
 
 public static boolean fungsiHapus(Integer number) {
-    if ((number - 1) > list.length) {
+    // cek apakah yg dihapus apakah di luar kapasitas Array
+    if ((number - 1) >= list.length) {
         return false;
     } else if (list[number - 1] ==  null) {
+    // cek untuk apabila dia ada di urutan terakhir untuk mengisi 'nul' karena isi nya tersebut telah di pindahkan ke depan nya    
         return false;
     } else {
-        list[number - 1] = null;
-        return true;
+        for (int i = number - 1; i < list.length; i++) {
+        if (i == (list.length - 1)) {
+            list[i] = null;
+        } else {
+            // memindahkan list yg di belakang menjadi maju 1 langkah.
+            list[i] = list[i + 1];
+        }
     }
+
+    return true;
+}
 }
 
-public static void tesHapus() {
-    fungsiTambah("123");
-    fungsiTambah("234");
-
-    fungsiHapus(1);
-    showTodolist();
-}
 
 public static void viewTodolist() {
 
@@ -79,6 +82,6 @@ public static void viewTambah() {
 }
 
 public static void main(String[] args) {
-   tesHapus();
+   
 }
 }
