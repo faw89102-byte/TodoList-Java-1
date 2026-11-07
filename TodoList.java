@@ -1,10 +1,14 @@
+import java.util.Scanner;
+
 public class TodoList {
 
 // Array untuk menampung isi to-do-list
     public static String[] list = new String[10];
+    public static java.util.Scanner scanner = new java.util.Scanner(System.in);
 
 public static void showTodolist() {
 
+    System.out.println("To-do-List : ");
     for (var i = 0; i < list.length; i++) {
         var toDo = list[i];
         var no = i + 1;
@@ -68,20 +72,71 @@ public static boolean fungsiHapus(Integer number) {
 }
 }
 
+public static String input(String perintah) {
+    System.out.print(perintah + " : ");
+    String data = scanner.nextLine();
+    return data;
+}
+
 
 public static void viewTodolist() {
 
+    while (true) {
+
+    showTodolist();
+
+    System.out.println("MENU : ");
+    System.out.println("1. Tambah");
+    System.out.println("2. Hapus");
+    System.out.println("x. keluar");
+
+    var toDo = input("Pilihan ");
+
+    if (toDo.equals("1")) {
+        viewTambah();
+    } else if (toDo.equals("2")) {
+        viewHapus();
+    } else if (toDo.equals("x")) {
+        break;    
+    } else {
+        System.err.println("ERROR!");
+    }
+
+    }
+    
+
 }
+
 
 public static void viewHapus() {
+    var hapus = input("Pilih no yang ingin dihapus ('x' untuk keluar)");
 
+    if (hapus.equals("x")) {
+        
+    } else {
+        boolean cekHapus = fungsiHapus(Integer.valueOf(hapus));
+        if (!cekHapus) {
+            System.out.println("Gagal menghapus : " + cekHapus);
+        }
+    }
 }
+
+
 
 public static void viewTambah() {
+    System.out.println("TAMBAH TO-DO-LIST");
+    var tambah = input("Masukkan To-do untuk ditambahkan ('x untukk keluar')");
 
+    if (tambah.equals("x")) {
+        
+    } else {
+        fungsiTambah(tambah);
+    }
 }
 
+
+// Main Utama
 public static void main(String[] args) {
-   
+  viewTodolist();
 }
 }
